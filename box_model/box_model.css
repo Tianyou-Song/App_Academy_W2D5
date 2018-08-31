@@ -1,4 +1,8 @@
 div {
+  height: 200px;
+  width: 200px;
+  padding: 50px;
+  border: 5px solid black;
 }
 
 #first-div {
@@ -7,6 +11,11 @@ div {
 
 #second-div {
   background-color: #ff4136;
+  box-sizing: border-box;
+}
+
+.third-div {
+  min-height: 10px;
 }
 
 p {
