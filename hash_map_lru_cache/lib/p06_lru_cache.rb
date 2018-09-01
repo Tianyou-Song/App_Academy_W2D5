@@ -15,6 +15,7 @@ class LRUCache
   end
 
   def get(key)
+    @prc.call(key)
   end
 
   def to_s
@@ -23,7 +24,9 @@ class LRUCache
 
   private
 
-  def calc!(key)
+  def calc!(key, prc)
+    val = prc.call(key)
+    @store.set(val, key)
     # suggested helper method; insert an (un-cached) key
   end
 

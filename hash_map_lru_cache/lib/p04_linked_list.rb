@@ -13,12 +13,13 @@ class Node
   end
 
   def remove
-    prev_node = self.prev 
-    next_node = self.next 
-    prev_node.next = next_node
-    next_node.prev = prev_node
-    # self.next.prev = self.prev
-    # self.prev.next = self.next
+    # prev_node = self.prev 
+    # next_node = self.next 
+    # prev_node.next = next_node
+    # next_node.prev = prev_node
+    self.next.prev = self.prev
+    self.prev.next = self.next
+    self.next, self.prev = nil, nil
     # optional but useful, connects previous link to next link
     # and removes self from list.
   end
@@ -26,6 +27,7 @@ end
 
 class LinkedList
   include Enumerable
+  attr_reader :head, :tail
   
   def initialize
     @head = Node.new
@@ -79,10 +81,14 @@ class LinkedList
 
   def append(key, val)
     new_node = Node.new(key, val)
+    # new_node.next = @tail 
+    # new_node.prev = @tail.prev.next
+    # @tail.prev.next = new_node 
+    # @tail.prev = new_node 
     new_node.next = @tail 
-    new_node.prev = @tail.prev.next
-    @tail.prev.next = new_node 
-    @tail.prev = new_node 
+    new_node.prev = @tail.prev 
+    @tail.prev.next = new_node
+    @tail.prev = new_node
   end
 
   def update(key, val)
@@ -93,8 +99,11 @@ class LinkedList
 
   def remove(key)
     node_remove = get_node(key)
+    # node_remove.prev.next = node_remove.next
+    # node_remove.next.prev = node_remove.prev 
     node_remove.remove
-    nil
+    # nil
+    node_remove
   end
 
   def each(&prc)
